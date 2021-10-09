@@ -13,10 +13,23 @@ namespace AllSoldOut.Models
         {
 
         }
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Product> products { get; set; }
+        public DbSet<Sales> sales { get; set; }
         public DbSet<Role> roles { get; set; }
         public DbSet<Store> stores { get; set; }
         public DbSet<User> users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            mb.Entity<Role>().HasData(new
+            {
+                roleId = 1,
+                roleName = "Admin"
+            },
+            new
+            {
+                roleId = 2,
+                roleName = "Customer"
+            });
+        }
     }
 }
