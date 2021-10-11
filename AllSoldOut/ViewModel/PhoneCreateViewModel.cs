@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace AllSoldOut.ViewModel
 {
-    public class SalesDetailsViewModel
+    public class PhoneCreateViewModel
     {
         public Phone store { get; set; }
         public Customer customers { get; set; }
-        public  int daysOnHold { get; set; }
     }
 }

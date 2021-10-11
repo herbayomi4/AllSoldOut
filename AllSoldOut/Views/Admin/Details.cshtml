@@ -1,4 +1,4 @@
-﻿@model AllSoldOut.Models.Store
+﻿@model AllSoldOut.Models.Phone
 
 @{
     Layout = "_AdminLayout";
@@ -39,6 +39,6 @@
     <div><img src="@ViewBag.path" alt="Alternate Text" /></div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.storeId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.productId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

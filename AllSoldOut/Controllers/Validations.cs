@@ -20,15 +20,15 @@ namespace AllSoldOut.Controllers
             _logger = logger;
         }
 
-        public IActionResult VerifyEmail(string email)
-        {
-            var data = _db.sales.FirstOrDefault(x => x.email == email);
-            if(data != null)
-            {
-                return Json($"Email {email} is already in use.");
-            }
+        //public IActionResult VerifyEmail(string email)
+        //{
+        //    var data = _db.sales.FirstOrDefault(x => x.email == email);
+        //    if(data != null)
+        //    {
+        //        return Json($"Email {email} is already in use.");
+        //    }
 
-            return Json(true);
-        }
+        //    return Json(true);
+        //}
     }
 }

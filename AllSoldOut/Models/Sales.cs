@@ -10,29 +10,23 @@ namespace AllSoldOut.Models
 {
     public class Sales
     {
-        [ForeignKey("Store")]
-        public int salesId { get; set; }
+        [Key]
+        public int productId { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Sales Date")]
-        public DateTime saleDate { get; set; }
+        public DateTime salesDate { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Range(0, 50000.00)]
+        [Display(Name = "Sales Price")]
+        public double salesPrice { get; set; }
+
+        [Required]
+        [Display(Name = "Payment Platform")]
         [StringLength(50, ErrorMessage = "First Name length can't be more than 50.")]
-        public string firstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        [StringLength(50, ErrorMessage = "Last Name length can't be more than 50.")]
-        public string lastName { get; set; }
-
-        [EmailAddress]
-        [Remote (action: "VerifyEmail", controller: "Validations")]
-        public string email { get; set; }
-
-        [Phone]
-        public int contact { get; set; }
+        public string paymentPlatform { get; set; }
+        public int customerId { get; set; }
 
     }
 }

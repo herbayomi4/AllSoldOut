@@ -32,7 +32,7 @@ namespace AllSoldOut.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var store = await _context.stores.Where(x => x.salesId == null).ToListAsync();
+            var store = await _context.phones.Where(x => x.available == true).ToListAsync();
             return View("index", store);
         }
 
@@ -45,7 +45,7 @@ namespace AllSoldOut.Controllers
 
         //Create the product and calls a method "SaveImage" that saves the upploaded image in the www root folder 
         [HttpPost]
-        public async Task<IActionResult> Store (Store store, IFormFile productImage)
+        public async Task<IActionResult> Store (Phone store, IFormFile productImage)
         {
             if (productImage !=null)
             {
@@ -53,7 +53,7 @@ namespace AllSoldOut.Controllers
                 this.SaveImage(productImage, fileName);
                 store.productImageName = fileName;
             }
-            await _context.stores.AddAsync(store);
+            await _context.phones.AddAsync(store);
             
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -104,13 +104,7 @@ namespace AllSoldOut.Controllers
         {
             try
             {
-                var data = await _context.stores.Where(x => x.storeId == id).FirstOrDefaultAsync();
-
-                //Form the file name and add to the nullable productImageName
-                //string www = Path.Combine(this._env.WebRootPath, "Files");
-                //string name = data.productImageName.ToString();
-                //string path = Path.Combine(www, name);
-                //data.productImageName = path;
+                var data = await _context.phones.Where(x => x.productId == id).FirstOrDefaultAsync();
                 ViewBag.path = Url.Content("~/Files/"+(data.productImageName).ToString()+".png");
                 return View("Details", data);
                 //return Json(data);
@@ -121,32 +115,30 @@ namespace AllSoldOut.Controllers
                 throw;
             }
             
-
-            
         }
 
         [HttpGet]
-        public IActionResult SalesDetails(int id)
-        {
-            var data = from stores in _context.Set<Store>()
-                       join sales in _context.Set<Sales>()
-                       on stores.salesId equals sales.salesId
-                       select new { stores, sales };
-            return View("Details", data);
-        }
+        //public IActionResult SalesDetails(int id)
+        //{
+        //    var data = from phones in _context.Set<Phone>()
+        //               join sales in _context.Set<Sales>()
+        //               on phones.salesId equals sales.salesId
+        //               select new { phones, sales };
+        //    return View("Details", data);
+        //}
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var data = await _context.stores.Where(x => x.storeId == id).FirstOrDefaultAsync();
+            var data = await _context.phones.Where(x => x.productId == id).FirstOrDefaultAsync();
             return View("Edit", data);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Store store)
+        public async Task<IActionResult> Update(Phone store)
         {
             if (ModelState.IsValid)
             {
-                var data = await _context.stores.FindAsync(store.storeId);
+                var data = await _context.phones.FindAsync(store.productId);
                 data.productName = store.productName;
                 data.productCategory = store.productCategory;
                 data.productDescription = store.productDescription;
@@ -154,14 +146,14 @@ namespace AllSoldOut.Controllers
 
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Details", new { id = store.storeId });
+            return RedirectToAction("Details", new { id = store.productId });
 
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var data = await _context.stores.Where(x => x.storeId == id).FirstOrDefaultAsync();
-             _context.stores.Remove(data);
+            var data = await _context.phones.Where(x => x.productId == id).FirstOrDefaultAsync();
+             _context.phones.Remove(data);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -13,9 +13,10 @@ namespace AllSoldOut.Models
         {
 
         }
-        public DbSet<Sales> sales { get; set; }
+        public DbSet<Customer> customers { get; set; }
         public DbSet<Role> roles { get; set; }
-        public DbSet<Store> stores { get; set; }
+        public DbSet<Phone> phones { get; set; }
+        public DbSet<Sales> sales { get; set; }
         public DbSet<User> users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)

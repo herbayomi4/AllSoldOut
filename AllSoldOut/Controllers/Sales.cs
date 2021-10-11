@@ -8,7 +8,7 @@ namespace AllSoldOut.Controllers
 {
     public class Sales : Controller
     {
-        public IActionResult Index()
+        public ViewResult List()
         {
             return View();
         }
