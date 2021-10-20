@@ -1,0 +1,91 @@
+﻿@model IEnumerable<AllSoldOut.Models.Product>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "View";
+    int y = 1;
+}
+
+<p>
+    <a class="text-" asp-action="Create">Create New</a>
+</p>
+
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive" cellspacing="0" width="100%" style="font-size: smaller;">
+    <thead>
+        <tr>
+            <th>
+                S/N
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantityAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateCreated)
+            </th>
+            <th>
+                Days in Store
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
+        {
+        <tr>
+            <td>
+                @y
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.productCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.productPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.productColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.inStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.quantityAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data.dateCreated)
+            </td>
+            <td>
+                @{
+                    int num = Convert.ToInt32((DateTime.Now - item.Data.dateCreated).TotalDays);
+                }
+                @num
+            </td>
+            <td>
+                <a class="text-white" asp-action="Edit" asp-route-id="@item.Data.productId"><button style="font-size: smaller;" class="btn btn-primary">Edit</button></a> |
+                <a class="text-white" asp-action="Details" asp-route-id="@item.Data.productId"><button style="font-size: smaller;" class="btn btn-info">Details</button></a> |
+                <a class="text-white" asp-action="Delete" asp-route-id="@item.Data.productId"><button style="font-size: smaller;" class="btn btn-danger">Delete</button></a>
+            </td>
+        </tr>
+
+            y = y + 1;
+         }
+    </tbody>
+</table>
+

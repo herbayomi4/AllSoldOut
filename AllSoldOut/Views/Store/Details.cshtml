@@ -1,0 +1,132 @@
+﻿@model AllSoldOut.ViewModel.PhoneDetailsViewModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Phone Details </h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-fluid" src="@ViewBag.path" alt="Alternate Text" style="max-width:100%;" /><br />
+            <h6 class="text-body">@Html.DisplayFor(model => model.products.productName)</h6><br />
+            <dl class="row">
+                <dt class="col-sm-8">
+                    @Html.DisplayNameFor(model => model.products.inStock)
+                </dt>
+                <dd class="col-sm-4 pull-left">
+                    @Html.DisplayFor(model => model.products.inStock)
+                </dd>
+                <dt class="col-sm-8">
+                    @Html.DisplayNameFor(model => model.products.quantityAvailable)
+                </dt>
+                <dd class="col-sm-4 pull-left">
+                    @Html.DisplayFor(model => model.products.quantityAvailable)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-9">
+            <dl class="row">
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.products.productCategory)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.products.productCategory)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.products.productPrice)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.products.productPrice)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.products.productColor)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.products.productColor)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.products.productDescription)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.products.productDescription)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.products.dateCreated)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.products.dateCreated)
+                </dd>
+
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.launchDate)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.launchDate)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.bodyDimension)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.bodyDimension)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.bodyWeight)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.bodyWeight)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.displayResolution)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.displayResolution)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.displaySize)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.displaySize)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.platformOS)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.platformOS)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.ram)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.ram)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.internalMemory)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.internalMemory)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.camera)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.camera)
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.specifications.batteryStandbyTime)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.specifications.batteryStandbyTime)
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+    
+</div>
+<div class="">
+    <a asp-action="Edit" asp-route-id="@Model.products.productId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

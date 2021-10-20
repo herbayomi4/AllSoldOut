@@ -1,0 +1,109 @@
+﻿@model AllSoldOut.ViewModel.PhoneDetailsViewModel
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li><a asp-action="Index">All Categories</a></li>
+                    <li><a asp-action="Category" asp-route-id="@Model.products.productCategory">@Html.DisplayFor(model => model.products.productCategory)</a></li>
+                    <li class="active">@Html.DisplayFor(model => model.products.productName)</li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="@ViewBag.path" alt="" style="width:10em; height:15em;">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Html.DisplayFor(model => model.products.productName)</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                    </div>
+                    <div>
+                        <h3 class="product-price">$@Html.DisplayFor(model => model.products.productPrice) </h3>
+                        <span class="product-available">In Stock</span>
+                    </div>
+                    <p>@Html.DisplayFor(model => model.products.productDescription)</p>
+
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" asp-for="@Model.products.productId" name="productId" />
+                        <div class="add-to-cart">
+                            <div class="qty-label">
+                                Qty
+                                <div class="input-number">
+                                    <input type="number" id="qty" name="quantity">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                    <span asp-validation-for="carts.quantity" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        </div>
+                    </form>
+
+
+                    <ul class="product-links">
+                        <li>Category:</li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

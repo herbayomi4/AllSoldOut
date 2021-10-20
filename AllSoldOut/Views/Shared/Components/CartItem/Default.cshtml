@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AllSoldOut.Models.Cart>
+
+    <div class="cart-list">
+        @foreach (var item in Model)
+        {
+            <div class="product-widget">
+                <div class="product-img">
+                    @{
+                        string path = Url.Content("~/Files/" + (item.productImageName).ToString() + ".png");
+                    }
+                    <img src="@path" alt="">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.productName)</a></h3>
+                    <h4 class="product-price"><span class="qty">@Html.DisplayFor(modelItem => item.quantity)x</span>$@Html.DisplayFor(modelItem => item.total)</h4>
+                </div>
+                <button class="delete"><i class="fa fa-close"></i></button>
+            </div>
+        }
+        </div>
+    <div class="cart-summary">
+        <small>@ViewBag.countCart Item(s) selected</small>
+        <h5>SUBTOTAL: $@ViewBag.sumOfTotal</h5>
+    </div>
+    <div class="cart-btns">
+        <a href="#">View Cart</a>
+        <a asp-controller="Home" asp-action="Checkout">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+    </div>

@@ -1,0 +1,139 @@
+﻿@model AllSoldOut.ViewModel.PhoneCreateViewModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create";
+}
+
+<h5 class="text-info">Add New Products to Store</h5>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Store" asp-action="OnCreate" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="products.productCategory" class="control-label"></label>
+                        <select asp-for="products.productCategory" class="form-control form-control-sm">
+                            <option value="">Please select phone category</option>
+                            <option value="Iphone">Apple Iphone</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="Tecno">Tecno</option>
+                            <option value="Infinix">Infinix</option>
+                            <option value="Nokia">Nokia</option>
+                            <option value="lg">LG</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="products.productName" class="control-label"></label>
+                        <input asp-for="products.productName" class="form-control" />
+                        <span asp-validation-for="products.productName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="products.productPrice" class="control-label"></label>
+                        <input asp-for="products.productPrice" class="form-control" type="number" min="100" max="10000" />
+                        <span asp-validation-for="products.productPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="products.productColor" class="control-label"></label>
+                        <input asp-for="products.productColor" class="form-control" />
+                        <span asp-validation-for="products.productColor" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="products.productDescription" class="control-label"></label>
+                        <input asp-for="products.productDescription" class="form-control" />
+                        <span asp-validation-for="products.productDescription" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="specifications.launchDate" class="control-label"></label>
+                        <input asp-for="specifications.launchDate" class="form-control" />
+                        <span asp-validation-for="specifications.launchDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.bodyDimension" class="control-label"></label>
+                        <input asp-for="specifications.bodyDimension" class="form-control" />
+                        <span asp-validation-for="specifications.bodyDimension" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.bodyWeight" class="control-label"></label>
+                        <input asp-for="specifications.bodyWeight" class="form-control" type="number" />
+                        <span asp-validation-for="specifications.bodyWeight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.displayResolution" class="control-label"></label>
+                        <input asp-for="specifications.displayResolution" class="form-control" />
+                        <span asp-validation-for="specifications.displayResolution" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.displaySize" class="control-label"></label>
+                        <input asp-for="specifications.displaySize" class="form-control" />
+                        <span asp-validation-for="specifications.displaySize" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="specifications.platformOS" class="control-label"></label>
+                        <input asp-for="specifications.platformOS" class="form-control" />
+                        <span asp-validation-for="specifications.platformOS" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.ram" class="control-label"></label>
+                        <input asp-for="specifications.ram" class="form-control" type="number" />
+                        <span asp-validation-for="specifications.ram" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.internalMemory" class="control-label"></label>
+                        <input asp-for="specifications.internalMemory" class="form-control" type="number" />
+                        <span asp-validation-for="specifications.internalMemory" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.camera" class="control-label"></label>
+                        <input asp-for="specifications.camera" class="form-control"  type="number"/>
+                        <span asp-validation-for="specifications.camera" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="specifications.batteryStandbyTime" class="control-label"></label>
+                        <input asp-for="specifications.batteryStandbyTime" class="form-control" type="number" />
+                        <span asp-validation-for="specifications.batteryStandbyTime" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+
+            <div class="form-group align-items-end row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="products.inStock" class="control-label"></label>
+                        <input asp-for="products.inStock" class="form-control" type="number" min="1" max="100" />
+                        <span asp-validation-for="products.inStock" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-5 form-group float-right">
+                    <input name="productImage" class="form-control" type="file" placeholder="Product Image" />
+                </div>
+                <div class="col-md-1 float-right form-group">
+                    <input type="submit" value="Create" class="btn btn-info" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="float-right">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}
