@@ -11,7 +11,6 @@ namespace AllSoldOut.Models
     public class Customer
     {
         public int customerId { get; set; }
-        public int salesId { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

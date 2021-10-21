@@ -1,0 +1,45 @@
+﻿@model AllSoldOut.Models.User
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> - AcmeDrone</title>
+    <link rel="stylesheet" href="~/css/theme/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Form.css" />
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <br /><br />
+                  <div class="container" id="container">
+                      <form method="post" asp-controller="Login" asp-action="Logon">
+                          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                          <br />
+                          <h2 class="text-dark">Sign In</h2>
+                          <input type="email" asp-for="email" placeholder="Email" required />
+                          <input type="password" asp-for="password" placeholder="Password" required />
+                          <a href="#">Forgot your password?</a>
+                          <button>Sign In</button>
+                      </form>
+                      @{
+                          if (ViewBag.errorMessage != null)
+                          {
+                              <p class="text-center alert alert-danger"><strong>@ViewBag.errorMessage</strong></p>
+                          }
+                      }
+                  </div>
+        </main>
+
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>

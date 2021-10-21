@@ -36,7 +36,7 @@
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
                     <div class="product-preview">
-                        <img src="@ViewBag.path" alt="" style="width:10em; height:15em;">
+                        <img src="@ViewBag.path" alt="" style="width:14em; height:21em;">
                     </div>
                 </div>
             </div>
@@ -61,6 +61,26 @@
                     </div>
                     <p>@Html.DisplayFor(model => model.products.productDescription)</p>
 
+                    <dl class="row">
+                        <dt class="col-sm-5">Operating System: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.platformOS)</dd>
+                        <dt class="col-sm-5">Color: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.products.productColor)</dd>
+                        <dt class="col-sm-5">Dimension: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.bodyDimension)</dd>
+                        <dt class="col-sm-5">Resolution: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.displayResolution)</dd>
+                        <dt class="col-sm-5">Memory-RAM: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.ram) GB</dd>
+                        <dt class="col-sm-5">Memory-ROM: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.internalMemory) GB</dd>
+                        <dt class="col-sm-5">Camera Power: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.camera) Mega Pixel</dd>
+                        <dt class="col-sm-5">Battery Life: </dt>
+                        <dd class="col-sm-7">@Html.DisplayFor(model => model.specifications.bodyDimension) Hours</dd>
+                    </dl>
+                    
+
                     <form asp-action="AddToCart" method="post">
                         <input type="hidden" asp-for="@Model.products.productId" name="productId" />
                         <div class="add-to-cart">
@@ -75,15 +95,16 @@
                             </div>
                             <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
                         </div>
+                        @{
+                            if (ViewBag.successMessage != null)
+                            {
+                                <p class="text-center alert alert-success"><strong>@ViewBag.successMessage</strong></p>
+                            }
+                        }
                     </form>
 
 
-                    <ul class="product-links">
-                        <li>Category:</li>
-                        <li><a href="#">Headphones</a></li>
-                        <li><a href="#">Accessories</a></li>
-                    </ul>
-
+                    
                     <ul class="product-links">
                         <li>Share:</li>
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -103,7 +124,7 @@
     <!-- /container -->
 </div>
 
-<div>
+<div class="pull-right">
     <a asp-action="Index">Back to List</a>
 </div>
 

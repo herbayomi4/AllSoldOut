@@ -22,8 +22,9 @@ namespace AllSoldOut.Models
         public DbSet<PhoneMaker> phoneMakers { get; set; }
         public DbSet<Sales> sales { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<CartItem> cartItems { get; set; }
-
+        public DbSet<AllSoldOut.ViewModel.PhoneDetailsViewModel> PhoneListViewModel { get; set; }
+        public DbSet<AllSoldOut.ViewModel.PhoneCreateViewModel> PhoneCreateViewModel { get; set; }
+        public DbSet<AllSoldOut.ViewModel.CheckoutViewModel> CheckoutViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -36,6 +37,19 @@ namespace AllSoldOut.Models
             {
                 roleId = 2,
                 roleName = "Customer"
+            });
+
+            mb.Entity<User>().HasData(new
+            {
+                userId = 1,
+                firstName = "Admin",
+                lastName = "Admin",
+                email = "admin@admin",
+                password = PasswordHash.Hash("admin1234"),
+                address = "GTBank",
+                city = "Victoria Island",
+                contact = "09034582835",
+                roleId = 1
             });
 
             mb.Entity<PhoneMaker>().HasData(new
@@ -76,12 +90,6 @@ namespace AllSoldOut.Models
             });
         }
 
-        public DbSet<AllSoldOut.ViewModel.PhoneDetailsViewModel> PhoneListViewModel { get; set; }
 
-        public DbSet<AllSoldOut.ViewModel.PhoneCreateViewModel> PhoneCreateViewModel { get; set; }
-
-        public DbSet<AllSoldOut.Models.Specifications> Specifications { get; set; }
-
-        public DbSet<AllSoldOut.ViewModel.CheckoutViewModel> CheckoutViewModel { get; set; }
     }
 }

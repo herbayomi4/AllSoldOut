@@ -21,18 +21,23 @@ namespace AllSoldOut.Controllers
         private readonly ILogger<StoreController> _logger;
         private  ApplicationDbContext _context;
         private IHostingEnvironment _env;
+
         public StoreController(ApplicationDbContext context, ILogger<StoreController> logger, IHostingEnvironment env)
         {
             _context = context;
             _logger = logger;
             _env = env;
-        }
 
+        }
 
         //Returns a list of available products in the products
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var products = await _context.products.Where(x => x.available == true).OrderByDescending(x =>x.dateCreated) .ToListAsync();
 
             return View("index", products);
@@ -42,6 +47,10 @@ namespace AllSoldOut.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -49,6 +58,10 @@ namespace AllSoldOut.Controllers
         [HttpPost]
         public async Task<IActionResult> OnCreate (Product products, Specifications specifications, IFormFile productImage)
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             products.quantityAvailable = products.inStock;
             
             await _context.products.AddAsync(products);
@@ -109,6 +122,10 @@ namespace AllSoldOut.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             try
             {
                 var product = await _context.products.Where(x => x.productId == id).FirstOrDefaultAsync();
@@ -144,6 +161,10 @@ namespace AllSoldOut.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var product = await _context.products.Where(x => x.productId == id).FirstOrDefaultAsync();
             var spec = await _context.specifications.Where(x => x.productId == id).FirstOrDefaultAsync();
 
@@ -165,6 +186,10 @@ namespace AllSoldOut.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Product products, Specifications specifications, IFormFile productImage)
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 var data = await _context.products.Where(x => x.productId == products.productId).FirstOrDefaultAsync(); 
@@ -207,6 +232,10 @@ namespace AllSoldOut.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            if (HttpContext.Session.GetInt32("role") != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var phone = await _context.products.Where(x => x.productId == id).FirstOrDefaultAsync();
              _context.products.Remove(phone);
 

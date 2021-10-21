@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AllSoldOut.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211019115514_today")]
-    partial class today
+    [Migration("20211020132416_FreshStart")]
+    partial class FreshStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,10 @@ namespace AllSoldOut.Migrations
 
             modelBuilder.Entity("AllSoldOut.Models.Cart", b =>
                 {
-                    b.Property<string>("guid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("cartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("productId")
                         .HasColumnType("int");
@@ -38,44 +40,15 @@ namespace AllSoldOut.Migrations
                     b.Property<decimal>("productPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("quantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("total")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("guid");
+                    b.HasKey("cartId");
 
-                    b.ToTable("carts");
-                });
-
-            modelBuilder.Entity("AllSoldOut.Models.CartItem", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("guid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ItemId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("cartItems");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("AllSoldOut.Models.Customer", b =>
@@ -109,9 +82,6 @@ namespace AllSoldOut.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<int>("salesId")
-                        .HasColumnType("int");
 
                     b.HasKey("customerId");
 
@@ -190,7 +160,7 @@ namespace AllSoldOut.Migrations
                     b.Property<DateTime>("dateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("inStock")
+                    b.Property<int>("inStock")
                         .HasColumnType("int");
 
                     b.Property<string>("productCategory")
@@ -215,7 +185,7 @@ namespace AllSoldOut.Migrations
                     b.Property<decimal>("productPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("quantityAvailable")
+                    b.Property<int>("quantityAvailable")
                         .HasColumnType("int");
 
                     b.HasKey("productId");
@@ -266,8 +236,8 @@ namespace AllSoldOut.Migrations
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("quantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("salesDate")
                         .HasColumnType("datetime2");
@@ -322,15 +292,13 @@ namespace AllSoldOut.Migrations
 
                     b.HasKey("productId");
 
-                    b.ToTable("Specifications");
+                    b.ToTable("specifications");
                 });
 
             modelBuilder.Entity("AllSoldOut.Models.User", b =>
                 {
-                    b.Property<int>("userId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
@@ -339,9 +307,6 @@ namespace AllSoldOut.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("contact")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("firstName")
@@ -357,9 +322,26 @@ namespace AllSoldOut.Migrations
                     b.Property<int>("roleId")
                         .HasColumnType("int");
 
-                    b.HasKey("userId");
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("email");
 
                     b.ToTable("users");
+
+                    b.HasData(
+                        new
+                        {
+                            email = "admin@admin",
+                            address = "GTBank",
+                            city = "Victoria Island",
+                            contact = "09034582835",
+                            firstName = "Admin",
+                            lastName = "Admin",
+                            password = "admin1234",
+                            roleId = 1,
+                            userId = 1
+                        });
                 });
 
             modelBuilder.Entity("AllSoldOut.ViewModel.CheckoutViewModel", b =>
@@ -369,22 +351,22 @@ namespace AllSoldOut.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("cartguid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("cartId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("customerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("userId")
-                        .HasColumnType("int");
+                    b.Property<string>("useremail")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("orderId");
 
-                    b.HasIndex("cartguid");
+                    b.HasIndex("cartId");
 
                     b.HasIndex("customerId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("useremail");
 
                     b.ToTable("CheckoutViewModel");
                 });
@@ -418,8 +400,8 @@ namespace AllSoldOut.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("cartsguid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("cartscartId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("productsproductId")
                         .HasColumnType("int");
@@ -429,22 +411,13 @@ namespace AllSoldOut.Migrations
 
                     b.HasKey("productId");
 
-                    b.HasIndex("cartsguid");
+                    b.HasIndex("cartscartId");
 
                     b.HasIndex("productsproductId");
 
                     b.HasIndex("specificationsproductId");
 
                     b.ToTable("PhoneListViewModel");
-                });
-
-            modelBuilder.Entity("AllSoldOut.Models.CartItem", b =>
-                {
-                    b.HasOne("AllSoldOut.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("AllSoldOut.Models.PhoneMaker", b =>
@@ -458,7 +431,7 @@ namespace AllSoldOut.Migrations
                 {
                     b.HasOne("AllSoldOut.Models.Cart", "cart")
                         .WithMany()
-                        .HasForeignKey("cartguid");
+                        .HasForeignKey("cartId");
 
                     b.HasOne("AllSoldOut.Models.Customer", "customer")
                         .WithMany()
@@ -466,7 +439,7 @@ namespace AllSoldOut.Migrations
 
                     b.HasOne("AllSoldOut.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("useremail");
                 });
 
             modelBuilder.Entity("AllSoldOut.ViewModel.PhoneCreateViewModel", b =>
@@ -484,7 +457,7 @@ namespace AllSoldOut.Migrations
                 {
                     b.HasOne("AllSoldOut.Models.Cart", "carts")
                         .WithMany()
-                        .HasForeignKey("cartsguid");
+                        .HasForeignKey("cartscartId");
 
                     b.HasOne("AllSoldOut.Models.Product", "products")
                         .WithMany()

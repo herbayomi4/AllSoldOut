@@ -18,19 +18,6 @@
                     <div class="form-group">
                         <label asp-for="products.productCategory" class="control-label"></label>
                         <input asp-for="products.productCategory" class="form-control" />
-                        @*<select asp-for="products.productCategory" class="form-control form-control-sm">
-            @foreach (var item in Model.phoneMakers)
-            {
-                if (item.makerName == Model.products.productCategory)
-                {
-                    <option value="phoneMakers.makerName" selected> phoneMakers.makerName</option>
-                }
-                else
-                {
-                    <option value="phoneMakers.makerName"> phoneMakers.makerName</option>
-                }
-            }
-        </select>*@
                         <span asp-validation-for="products.productCategory" class="text-danger"></span>
                     </div>
                     <div class="form-group">

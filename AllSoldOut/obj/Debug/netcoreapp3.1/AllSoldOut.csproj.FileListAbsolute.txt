@@ -868,3 +868,4 @@ C:\Users\Admin\source\repos\AllSoldOut\AllSoldOut\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\Admin\source\repos\AllSoldOut\AllSoldOut\obj\Debug\netcoreapp3.1\Razor\Views\Home\Checkout.cshtml.g.cs
 C:\Users\Admin\source\repos\AllSoldOut\AllSoldOut\obj\Debug\netcoreapp3.1\Razor\Views\Home\View.cshtml.g.cs
 C:\Users\Admin\source\repos\AllSoldOut\AllSoldOut\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Admin\source\repos\AllSoldOut\AllSoldOut\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
